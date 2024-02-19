@@ -31,4 +31,4 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/learning-laravel
