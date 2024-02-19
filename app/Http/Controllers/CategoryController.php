@@ -14,7 +14,6 @@ class CategoryController extends Controller
     public function __construct(CategoryRepositoryInterface $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
-        
     }
 
     public function index()
