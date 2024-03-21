@@ -7,32 +7,34 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/var/www/html
+    container_name: laravel-app
     working_dir: /var/www/html
     networks:
       - laravel
 
   web:
     image: nginx:latest
+    container_name: laravel-nginx
     volumes:
       - .:/var/www/html
-      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker-compose/nginx/default.conf:/etc/nginx/conf.d/default.conf
     ports:
-      - "8080:80"
+      - "8082:80"
     depends_on:
       - app
     networks:
       - laravel
 
-  db_mysql_1:
-    image: arm64v8/mysql
-    container_name: db_mysql_1
+  db_mysql:
+    image: mysql:5.7
+    container_name: db_mysql
     environment:
       MYSQL_ROOT_PASSWORD: en_plus_secret
       MYSQL_DATABASE: en_plus
       MYSQL_USER: en_plus
       MYSQL_PASSWORD: enplus_dev2022
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - laravel
 
